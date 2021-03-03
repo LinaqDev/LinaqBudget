@@ -1,0 +1,2 @@
+# LinaqBudget
+Personal budget application.

@@ -7,18 +7,18 @@ namespace LinaqBudget.ViewModels
 {
     public class AddCategoryViewModel:BaseModel
     {
-        public Category ResultAccount;
+        public Category ResultCategory;
         public AddCategoryViewModel()
         {
-            ResultAccount = new Category();
-            ResultAccount.CreationDate = DateTime.Now;
+            ResultCategory = new Category();
+            ResultCategory.CreationDate = DateTime.Now;
             OkCmd = new RelayCommand(OkExe);
             CancelCmd = new RelayCommand(CancelExe);
         }
 
         public AddCategoryViewModel(Category category)
         {
-            ResultAccount = category;
+            ResultCategory = category;
             Designation = category.Designation;
             Description = category.Description; 
             OkCmd = new RelayCommand(OkExe);
@@ -60,8 +60,8 @@ namespace LinaqBudget.ViewModels
 
         private void OkExe(object obj)
         {
-            ResultAccount.Designation = Designation;
-            ResultAccount.Description = Description; 
+            ResultCategory.Designation = Designation;
+            ResultCategory.Description = Description; 
 
             if (obj is Window win)
                 win.Close();

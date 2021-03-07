@@ -1,0 +1,28 @@
+﻿<Window x:Class="LinaqBudget.Views.AddTransactionWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LinaqBudget.Views"
+        mc:Ignorable="d"
+        Title="AddTransactionWin" Height="250" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Label>Designation</Label>
+            <TextBox Text="{Binding Designation}"/>
+            <Separator/>
+            <Label>Amount</Label>
+            <TextBox Text="{Binding Amount}" />
+            <Separator/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Ok" Margin="3" MinWidth="75" Command="{Binding OkCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"/>
+            <Button Content="Cancel" Margin="3" MinWidth="75" IsCancel="True" Command="{Binding CancelCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"/>
+        </StackPanel>
+    </Grid>
+</Window>

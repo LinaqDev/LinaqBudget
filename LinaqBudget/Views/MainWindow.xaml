@@ -31,7 +31,7 @@
         </Menu>
 
         <Border BorderBrush="black" BorderThickness="0,0,0.5,0" Grid.Row="1" Margin="{Binding LeftPanelMargin}">
-            <Expander ExpandDirection="Right" >
+            <Expander ExpandDirection="Right" IsExpanded="True">
                 <Grid Width="200" Margin="-20,5,0,0">
                     <Grid.RowDefinitions >
                         <RowDefinition Height="*"/>

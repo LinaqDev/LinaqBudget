@@ -68,7 +68,7 @@ namespace LinaqBudget.Services
         {
             Log.Information("Adding new category {0}", category.Designation);
             categories.Add(category);
-            SaveAccounts();
+            SaveCategories();
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace LinaqBudget.Services
             if (File.Exists(categoriesDataFilePath))
             {
                 Log.Information("categories loaded from file.");
-                var content = File.ReadAllText(accountstDataFilePath);
+                var content = File.ReadAllText(categoriesDataFilePath);
                 return JsonConvert.DeserializeObject<List<Category>>(content);
             }
 
@@ -255,7 +255,7 @@ namespace LinaqBudget.Services
         {
             Log.Information("Saving categories data...");
             var content = JsonConvert.SerializeObject(accounts, Formatting.Indented);
-            File.WriteAllText(accountstDataFilePath, content);
+            File.WriteAllText(categoriesDataFilePath, content);
         }
     }
 }

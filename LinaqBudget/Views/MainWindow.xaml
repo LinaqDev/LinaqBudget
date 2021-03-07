@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Menu Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0,0,0.5">
@@ -29,72 +29,78 @@
 
             </MenuItem>
         </Menu>
-        <Border BorderBrush="black" BorderThickness="0,0,0.5,0" Grid.Row="1">
-            <Grid>
-                <Grid.RowDefinitions >
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
 
-                <Border BorderBrush="Black" BorderThickness="0,0,0,0.5">
-                    <Grid>
+        <Border BorderBrush="black" BorderThickness="0,0,0.5,0" Grid.Row="1" Margin="{Binding LeftPanelMargin}">
+            <Expander ExpandDirection="Right" >
+                <Grid Width="200" Margin="-20,5,0,0">
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="Black" BorderThickness="0,0,0,0.5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="ACCOUNTS" HorizontalAlignment="Center" />
+
+                            <ListBox ItemsSource="{Binding Accounts}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
+                                <ListBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Delete" Command="{Binding DeleteAccountCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </ListBox.ContextMenu>
+
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Designation}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <Button Command="{Binding AddAccountCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="ACCOUNTS" HorizontalAlignment="Center"/>
+                        <TextBlock Text="CATEGORIES" HorizontalAlignment="Center"/>
 
-                        <ListBox ItemsSource="{Binding Accounts}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
+                        <ListBox ItemsSource="{Binding Categories}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
                             <ListBox.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Delete" Command="{Binding DeleteAccountCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}"> 
-                                    </MenuItem> 
+                                    <MenuItem Header="Delete" Command="{Binding DeleteCategoryCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                    </MenuItem>
                                 </ContextMenu>
                             </ListBox.ContextMenu>
 
-                            <ListBox.ItemTemplate>  
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel> 
+                                    <StackPanel>
                                         <TextBlock Text="{Binding Designation}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
 
-                        <Button Command="{Binding AddAccountCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
+                        <Button Command="{Binding AddCategoryCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
                     </Grid>
-                </Border>
 
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="CATEGORIES" HorizontalAlignment="Center"/>
-
-                    <ListBox ItemsSource="{Binding Categories}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
-                        <ListBox.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Delete" Command="{Binding DeleteCategoryCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
-                                </MenuItem>
-                            </ContextMenu>
-                        </ListBox.ContextMenu>
-
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Designation}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
-                    <Button Command="{Binding AddCategoryCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
                 </Grid>
-
-            </Grid>
+            </Expander>
         </Border>
 
         <TabControl Grid.Row="1" Grid.Column="1">

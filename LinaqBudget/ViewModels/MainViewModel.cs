@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LinaqBudget.ViewModels
@@ -31,10 +32,11 @@ namespace LinaqBudget.ViewModels
             DeleteAccountCmd = new RelayCommand(DeleteAccountExe);
 
             AddCategoryCmd = new RelayCommand(AddCategoryExe);
-            DeleteCategoryCmd = new RelayCommand(DeleteCategoryExe);
+            DeleteCategoryCmd = new RelayCommand(DeleteCategoryExe); 
+        }
 
-        } 
 
+        public ICommand ShowHideLeftPanelCmd { get; set; }
         public ICommand AddAccountCmd { get; set; }
         public ICommand DeleteAccountCmd { get; set; }
         public ICommand AddCategoryCmd { get; set; }
@@ -126,6 +128,6 @@ namespace LinaqBudget.ViewModels
                 dataService.DeleteCategoryById(acc.Id);
                 RefreshCategories();
             }
-        }
+        } 
     }
 }

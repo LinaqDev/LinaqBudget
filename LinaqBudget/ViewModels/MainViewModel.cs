@@ -25,14 +25,20 @@ namespace LinaqBudget.ViewModels
         {
             dataService = new JsonDataService();
             RefreshAccounts();
+            RefreshCategories();
 
             AddAccountCmd = new RelayCommand(AddAccountExe);
             DeleteAccountCmd = new RelayCommand(DeleteAccountExe);
 
-        }
+            AddCategoryCmd = new RelayCommand(AddCategoryExe);
+            DeleteCategoryCmd = new RelayCommand(DeleteCategoryExe);
+
+        } 
 
         public ICommand AddAccountCmd { get; set; }
         public ICommand DeleteAccountCmd { get; set; }
+        public ICommand AddCategoryCmd { get; set; }
+        public ICommand DeleteCategoryCmd { get; set; }
 
 
         private ObservableCollection<Account> _accounts;
@@ -47,9 +53,27 @@ namespace LinaqBudget.ViewModels
             }
         }
 
+        private ObservableCollection<Category> _categories;
+
+        public ObservableCollection<Category> Categories
+        {
+            get { return _categories; }
+            set
+            {
+                _categories = value;
+                RaisePropertyChanged(nameof(Categories));
+            }
+        }
+
+
         private void RefreshAccounts()
         {
             Accounts = new ObservableCollection<Account>(dataService.GetAllAccounts());
+        }
+
+        private void RefreshCategories()
+        {
+            Categories = new ObservableCollection<Category>(dataService.GetAllCategories());
         }
 
         private void AddAccountExe(object obj)
@@ -69,12 +93,38 @@ namespace LinaqBudget.ViewModels
             }
         }
 
+        private void AddCategoryExe(object obj)
+        {
+            var dc = new AddCategoryViewModel();
+            var win = new AddCategoryWin() { DataContext = dc };
+
+            win.ShowDialog();
+
+            if (dc.Canceled)
+                return;
+
+            if (dc.ResultCategory != null)
+            {
+                dataService.AddCategory(dc.ResultCategory);
+                RefreshCategories();
+            }
+        }
+
         private void DeleteAccountExe(object obj)
         {
             if (obj is Account acc)
             {
                 dataService.DeleteAccountById(acc.Id);
                 RefreshAccounts();
+            }
+        }
+
+        private void DeleteCategoryExe(object obj)
+        {
+            if (obj is Category acc)
+            {
+                dataService.DeleteCategoryById(acc.Id);
+                RefreshCategories();
             }
         }
     }

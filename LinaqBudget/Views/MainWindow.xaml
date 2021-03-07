@@ -74,14 +74,24 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="CATEGORIES" HorizontalAlignment="Center"/>
 
-                    <ListView Grid.Row="1" Margin="3" BorderThickness="0,0.5">
-                        <ListViewItem >Category 1</ListViewItem>
-                        <ListViewItem >Category 2</ListViewItem>
-                        <ListViewItem >Category 3</ListViewItem>
-                        <ListViewItem >Category 4</ListViewItem>
-                    </ListView>
+                    <ListBox ItemsSource="{Binding Categories}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Delete" Command="{Binding DeleteCategoryCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
 
-                    <Button Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Designation}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button Command="{Binding AddCategoryCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
                 </Grid>
 
             </Grid>

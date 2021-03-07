@@ -14,6 +14,10 @@ namespace LinaqBudget.Services
     {
         private string dataDirectory;
         private string accountstDataFilePath;
+        private string categoriesDataFilePath;
+
+        private List<Account> accounts { get; set; }
+        private List<Category> categories { get; set; }
 
         /// <summary>
         /// 
@@ -22,6 +26,7 @@ namespace LinaqBudget.Services
         {
             InitDirectories();
             accounts = LoadAccountsData();
+            categories = LoadCategoriesData();
         }
 
         /// <summary>
@@ -33,6 +38,7 @@ namespace LinaqBudget.Services
 
             dataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "LinaqBudget", "Data");
             accountstDataFilePath = Path.Combine(dataDirectory, "accounts.dat");
+            categoriesDataFilePath = Path.Combine(dataDirectory, "categories.dat");
 
             if (!Directory.Exists(dataDirectory))
             {
@@ -60,7 +66,9 @@ namespace LinaqBudget.Services
         /// <param name="category"></param>
         public void AddCategory(Category category)
         {
-            throw new NotImplementedException();
+            Log.Information("Adding new category {0}", category.Designation);
+            categories.Add(category);
+            SaveAccounts();
         }
 
         /// <summary>
@@ -90,7 +98,10 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Category> GetAllCategories()
         {
-            throw new NotImplementedException();
+            if (categories == null)
+                categories = LoadCategoriesData();
+
+            return categories;
         }
 
         /// <summary>
@@ -109,7 +120,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public Account GetSingleAccountById(string id)
         {
-            throw new NotImplementedException();
+            return accounts.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -119,7 +130,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public Category GetSingleCategoryById(string id)
         {
-            throw new NotImplementedException();
+            return categories.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -153,7 +164,6 @@ namespace LinaqBudget.Services
         }
 
 
-        private List<Account> accounts { get; set; }
 
         /// <summary>
         /// 
@@ -172,6 +182,23 @@ namespace LinaqBudget.Services
 
             Log.Information("accounts data file does not exist.");
             return new List<Account>();
+        }
+
+
+
+        private List<Category> LoadCategoriesData()
+        {
+            Log.Information("Loading categories data...");
+
+            if (File.Exists(categoriesDataFilePath))
+            {
+                Log.Information("categories loaded from file.");
+                var content = File.ReadAllText(accountstDataFilePath);
+                return JsonConvert.DeserializeObject<List<Category>>(content);
+            }
+
+            Log.Information("categories data file does not exist.");
+            return new List<Category>();
         }
 
         /// <summary>
@@ -210,12 +237,25 @@ namespace LinaqBudget.Services
 
         public void DeleteCategory(Category category)
         {
-            throw new NotImplementedException();
+            var toRemove = categories.FirstOrDefault(x => x.Id == category.Id);
+            categories.Remove(toRemove);
+            SaveCategories();
         }
+
 
         public void DeleteCategoryById(string id)
         {
-            throw new NotImplementedException();
+            var toRemove = categories.FirstOrDefault(x => x.Id == id);
+            categories.Remove(toRemove);
+            SaveCategories();
+        }
+
+
+        private void SaveCategories()
+        {
+            Log.Information("Saving categories data...");
+            var content = JsonConvert.SerializeObject(accounts, Formatting.Indented);
+            File.WriteAllText(accountstDataFilePath, content);
         }
     }
 }

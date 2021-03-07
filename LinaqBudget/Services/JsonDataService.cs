@@ -183,5 +183,39 @@ namespace LinaqBudget.Services
             var content = JsonConvert.SerializeObject(accounts, Formatting.Indented);
             File.WriteAllText(accountstDataFilePath, content);
         }
+
+        public void DeleteTransaction(Transaction transaction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteTransactionById(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAccount(Account account)
+        {
+            var toRemove = accounts.FirstOrDefault(x => x.Id == account.Id);
+            accounts.Remove(toRemove);
+            SaveAccounts();
+        }
+
+        public void DeleteAccountById(string id)
+        {
+            var toRemove = accounts.FirstOrDefault(x => x.Id == id);
+            accounts.Remove(toRemove);
+            SaveAccounts();
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCategoryById(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

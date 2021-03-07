@@ -13,15 +13,15 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <Label> Designation</Label>
-            <TextBox />
+            <TextBox Text="{Binding Designation}"/>
             <Separator/>
 
             <Label>Description</Label>
-            <TextBox />
+            <TextBox Text="{Binding Description}"/>
             <Separator/>
 
             <Label>Initial Balance</Label>
-            <TextBox />
+            <TextBox Text="{Binding Balance}" />
             <Separator/> 
         </StackPanel>
 

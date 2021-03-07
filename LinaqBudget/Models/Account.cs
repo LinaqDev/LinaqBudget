@@ -8,6 +8,11 @@ namespace LinaqBudget
 {
     public class Account
     {
+        public Account()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
         public string Id { get; set; }
         public string Designation { get; set; }
         public string Description { get; set; }

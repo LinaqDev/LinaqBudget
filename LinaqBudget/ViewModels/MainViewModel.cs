@@ -4,6 +4,7 @@ using LinaqBudget.Services;
 using LinaqBudget.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -23,11 +24,33 @@ namespace LinaqBudget.ViewModels
         public MainViewModel()
         {
             dataService = new JsonDataService();
+            RefreshAccounts();
+
             AddAccountCmd = new RelayCommand(AddAccountExe);
+            DeleteAccountCmd = new RelayCommand(DeleteAccountExe);
+
         }
 
         public ICommand AddAccountCmd { get; set; }
+        public ICommand DeleteAccountCmd { get; set; }
 
+
+        private ObservableCollection<Account> _accounts;
+
+        public ObservableCollection<Account> Accounts
+        {
+            get { return _accounts; }
+            set
+            {
+                _accounts = value;
+                RaisePropertyChanged(nameof(Accounts));
+            }
+        }
+
+        private void RefreshAccounts()
+        {
+            Accounts = new ObservableCollection<Account>(dataService.GetAllAccounts());
+        }
 
         private void AddAccountExe(object obj)
         {
@@ -42,6 +65,16 @@ namespace LinaqBudget.ViewModels
             if (dc.ResultAccount != null)
             {
                 dataService.AddAccount(dc.ResultAccount);
+                RefreshAccounts();
+            }
+        }
+
+        private void DeleteAccountExe(object obj)
+        {
+            if (obj is Account acc)
+            {
+                dataService.DeleteAccountById(acc.Id);
+                RefreshAccounts();
             }
         }
     }

@@ -7,6 +7,145 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0,0,0.5">
+            <MenuItem Header="_File">
+                
+            </MenuItem>
+            
+            <MenuItem Header="_Edit">
+
+            </MenuItem>
+
+            <MenuItem Header="_Help">
+
+            </MenuItem>
+        </Menu>
+        <Border BorderBrush="black" BorderThickness="0,0,0.5,0" Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border BorderBrush="Black" BorderThickness="0,0,0,0.5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="ACCOUNTS" HorizontalAlignment="Center"/>
+
+                        <ListView Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
+                            <ListViewItem >Account 1</ListViewItem>
+                            <ListViewItem >Account 2</ListViewItem>
+                            <ListViewItem >Account 3</ListViewItem>
+                            <ListViewItem >Account 4</ListViewItem>
+                        </ListView>
+                        
+                        <Button Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="CATEGORIES" HorizontalAlignment="Center"/>
+
+                    <ListView Grid.Row="1" Margin="3" BorderThickness="0,0.5">
+                        <ListViewItem >Category 1</ListViewItem>
+                        <ListViewItem >Category 2</ListViewItem>
+                        <ListViewItem >Category 3</ListViewItem>
+                        <ListViewItem >Category 4</ListViewItem>
+                    </ListView>
+
+                    <Button Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
+                </Grid>
+
+            </Grid>
+        </Border>
+
+        <TabControl Grid.Row="1" Grid.Column="1">
+            <TabItem Header="Transactions">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox MinWidth="100" Margin="3" />
+                        <ComboBox MinWidth="100" Margin="3"/>
+                    </StackPanel>
+                    
+                    <!--<Separator Grid.Row="1" Height="0.3"/>-->
+
+                    <ListView Grid.Row="2" Margin="3"  BorderThickness="0,0.5">
+                        <ListViewItem >Transaction 1</ListViewItem>
+                        <ListViewItem >Transaction 2</ListViewItem>
+                        <ListViewItem >Transaction 3</ListViewItem>
+                        <ListViewItem >Transaction 4</ListViewItem>
+                    </ListView>
+                    
+                    
+                    <!--<Separator Grid.Row="3" Height="0.3"/>-->
+
+                    <Button Grid.Row="4" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Recurring Transactions">
+                
+            </TabItem>
+        </TabControl>
+
+
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0.5,0,0">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions> 
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" /> 
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            
+            <StatusBarItem>
+                <TextBlock Text="v0.0.0" Margin="3,0"/>
+            </StatusBarItem>
+            
+            <Separator Grid.Column="1" />
+            
+            <StatusBarItem Grid.Column="2">
+                <TextBlock Text="..." />
+            </StatusBarItem>
+            
+            <Separator Grid.Column="3" />
+            
+            <StatusBarItem Grid.Column="4">
+                <ProgressBar Value="50" Width="90" Height="16" />
+            </StatusBarItem> 
+            
+        </StatusBar>
     </Grid>
 </Window>

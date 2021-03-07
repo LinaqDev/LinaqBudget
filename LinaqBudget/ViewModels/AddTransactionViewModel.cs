@@ -12,6 +12,7 @@ namespace LinaqBudget.ViewModels
     public class AddTransactionViewModel:BaseModel
     {
         public Transaction ResultTransaction;
+        public bool Canceled = true;
         public AddTransactionViewModel(string AccountId, string CategoryId)
         {
             ResultTransaction = new Transaction();
@@ -52,13 +53,16 @@ namespace LinaqBudget.ViewModels
 
         private void CancelExe(object obj)
         {
+            Canceled = true;
             if (obj is Window win)
                 win.Close();
         }
 
         private void OkExe(object obj)
-        { 
-            ResultTransaction.Description = Description; 
+        {
+            Canceled = false;
+            ResultTransaction.Description = Description;
+            ResultTransaction.Amount = Amount;
 
             if (obj is Window win)
                 win.Close();

@@ -14,6 +14,12 @@ namespace LinaqBudget.Services
     {
         private string dataDirectory;
         private string accountstDataFilePath;
+        private string categoriesDataFilePath;
+        private string transactionsDataFilePath;
+
+        private List<Account> accounts { get; set; }
+        private List<Category> categories { get; set; }
+        private List<Transaction> transactions { get; set; }
 
         /// <summary>
         /// 
@@ -22,6 +28,7 @@ namespace LinaqBudget.Services
         {
             InitDirectories();
             accounts = LoadAccountsData();
+            categories = LoadCategoriesData();
         }
 
         /// <summary>
@@ -33,6 +40,8 @@ namespace LinaqBudget.Services
 
             dataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "LinaqBudget", "Data");
             accountstDataFilePath = Path.Combine(dataDirectory, "accounts.dat");
+            categoriesDataFilePath = Path.Combine(dataDirectory, "categories.dat");
+            transactionsDataFilePath = Path.Combine(dataDirectory, "transactions.dat");
 
             if (!Directory.Exists(dataDirectory))
             {
@@ -60,7 +69,9 @@ namespace LinaqBudget.Services
         /// <param name="category"></param>
         public void AddCategory(Category category)
         {
-            throw new NotImplementedException();
+            Log.Information("Adding new category {0}", category.Designation);
+            categories.Add(category);
+            SaveCategories();
         }
 
         /// <summary>
@@ -69,7 +80,9 @@ namespace LinaqBudget.Services
         /// <param name="transaction"></param>
         public void AddTransaction(Transaction transaction)
         {
-            throw new NotImplementedException();
+            Log.Information("Adding new transactions {0}", transaction.Description);
+            transactions.Add(transaction);
+            SaveTransactions();
         }
 
         /// <summary>
@@ -90,7 +103,10 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Category> GetAllCategories()
         {
-            throw new NotImplementedException();
+            if (categories == null)
+                categories = LoadCategoriesData();
+
+            return categories;
         }
 
         /// <summary>
@@ -99,7 +115,10 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Transaction> GetAllTransactions()
         {
-            throw new NotImplementedException();
+            if (transactions == null)
+                transactions = LoadTransactionsData();
+
+            return transactions;
         }
 
         /// <summary>
@@ -109,7 +128,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public Account GetSingleAccountById(string id)
         {
-            throw new NotImplementedException();
+            return accounts.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -119,7 +138,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public Category GetSingleCategoryById(string id)
         {
-            throw new NotImplementedException();
+            return categories.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -129,7 +148,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public Transaction GetSingleTransactionById(string id)
         {
-            throw new NotImplementedException();
+            return transactions.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -139,7 +158,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Transaction> GetTransactionsForAccount(Account account)
         {
-            throw new NotImplementedException();
+            return transactions.Where(x => x.AccountId == account.Id).ToList();
         }
 
         /// <summary>
@@ -149,11 +168,8 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Transaction> GetTransactionsForCategory(Category category)
         {
-            throw new NotImplementedException();
+            return transactions.Where(x => x.CategoryId == category.Id).ToList();
         }
-
-
-        private List<Account> accounts { get; set; }
 
         /// <summary>
         /// 
@@ -177,23 +193,67 @@ namespace LinaqBudget.Services
         /// <summary>
         /// 
         /// </summary>
-        private void SaveAccounts()
+        /// <returns></returns>
+        private List<Category> LoadCategoriesData()
         {
-            Log.Information("Saving accounts data...");
-            var content = JsonConvert.SerializeObject(accounts, Formatting.Indented);
-            File.WriteAllText(accountstDataFilePath, content);
+            Log.Information("Loading categories data...");
+
+            if (File.Exists(categoriesDataFilePath))
+            {
+                Log.Information("categories loaded from file.");
+                var content = File.ReadAllText(categoriesDataFilePath);
+                return JsonConvert.DeserializeObject<List<Category>>(content);
+            }
+
+            Log.Information("categories data file does not exist.");
+            return new List<Category>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<Transaction> LoadTransactionsData()
+        {
+            Log.Information("Loading transactions data...");
+
+            if (File.Exists(transactionsDataFilePath))
+            {
+                Log.Information("transactions loaded from file.");
+                var content = File.ReadAllText(transactionsDataFilePath);
+                return JsonConvert.DeserializeObject<List<Transaction>>(content);
+            }
+
+            Log.Information("transactions data file does not exist.");
+            return new List<Transaction>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transaction"></param>
         public void DeleteTransaction(Transaction transaction)
         {
-            throw new NotImplementedException();
+            var toRemove = transactions.FirstOrDefault(x => x.Id == transaction.Id);
+            transactions.Remove(toRemove);
+            SaveTransactions();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteTransactionById(string id)
         {
-            throw new NotImplementedException();
+            var toRemove = transactions.FirstOrDefault(x => x.Id == id);
+            transactions.Remove(toRemove);
+            SaveTransactions();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="account"></param>
         public void DeleteAccount(Account account)
         {
             var toRemove = accounts.FirstOrDefault(x => x.Id == account.Id);
@@ -201,6 +261,10 @@ namespace LinaqBudget.Services
             SaveAccounts();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteAccountById(string id)
         {
             var toRemove = accounts.FirstOrDefault(x => x.Id == id);
@@ -208,14 +272,55 @@ namespace LinaqBudget.Services
             SaveAccounts();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="category"></param>
         public void DeleteCategory(Category category)
         {
-            throw new NotImplementedException();
+            var toRemove = categories.FirstOrDefault(x => x.Id == category.Id);
+            categories.Remove(toRemove);
+            SaveCategories();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteCategoryById(string id)
         {
-            throw new NotImplementedException();
+            var toRemove = categories.FirstOrDefault(x => x.Id == id);
+            categories.Remove(toRemove);
+            SaveCategories();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SaveAccounts()
+        {
+            Log.Information("Saving accounts data...");
+            var content = JsonConvert.SerializeObject(accounts, Formatting.Indented);
+            File.WriteAllText(accountstDataFilePath, content);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SaveCategories()
+        {
+            Log.Information("Saving categories data...");
+            var content = JsonConvert.SerializeObject(accounts, Formatting.Indented);
+            File.WriteAllText(categoriesDataFilePath, content);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SaveTransactions()
+        {
+            Log.Information("Saving transactions data...");
+            var content = JsonConvert.SerializeObject(transactions, Formatting.Indented);
+            File.WriteAllText(transactionsDataFilePath, content);
         }
     }
 }

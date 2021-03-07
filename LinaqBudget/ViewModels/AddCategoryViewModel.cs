@@ -7,10 +7,12 @@ namespace LinaqBudget.ViewModels
 {
     public class AddCategoryViewModel:BaseModel
     {
+        public bool Canceled = true;
         public Category ResultCategory;
         public AddCategoryViewModel()
         {
             ResultCategory = new Category();
+            Designation = "New Category";
             ResultCategory.CreationDate = DateTime.Now;
             OkCmd = new RelayCommand(OkExe);
             CancelCmd = new RelayCommand(CancelExe);
@@ -54,12 +56,14 @@ namespace LinaqBudget.ViewModels
 
         private void CancelExe(object obj)
         {
+            Canceled = true;
             if (obj is Window win)
                 win.Close();
         }
 
         private void OkExe(object obj)
         {
+            Canceled = false;
             ResultCategory.Designation = Designation;
             ResultCategory.Description = Description; 
 

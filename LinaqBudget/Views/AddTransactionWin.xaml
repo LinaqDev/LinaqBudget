@@ -12,8 +12,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Label>Designation</Label>
-            <TextBox Text="{Binding Designation}"/>
+            <Label>Description</Label>
+            <TextBox Text="{Binding Description}"/>
             <Separator/>
             <Label>Amount</Label>
             <TextBox Text="{Binding Amount}" />

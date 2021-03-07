@@ -12,6 +12,14 @@ namespace LinaqBudget.ViewModels
     public class AddAccountViewModel : BaseModel
     {
         public Account ResultAccount;
+        public AddAccountViewModel()
+        {
+            ResultAccount = new Account();
+            ResultAccount.CreationDate = DateTime.Now;
+            OkCmd = new RelayCommand(OkExe);
+            CancelCmd = new RelayCommand(CancelExe);
+        }
+
         public AddAccountViewModel(Account account)
         {
             ResultAccount = account;

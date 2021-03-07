@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LinaqBudget"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding AppCaption}" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -131,7 +131,7 @@
             </StatusBar.ItemsPanel>
             
             <StatusBarItem>
-                <TextBlock Text="v0.0.0" Margin="3,0"/>
+                <TextBlock Text="{Binding AppVersion}" Margin="3,0"/>
             </StatusBarItem>
             
             <Separator Grid.Column="1" />

@@ -93,6 +93,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Providers\JsonDataProvider.cs" />
+    <Compile Include="StorePositionBehavior.cs" />
     <Compile Include="ViewModels\AddAccountViewModel.cs" />
     <Compile Include="ViewModels\AddCategoryViewModel.cs" />
     <Compile Include="ViewModels\AddTransactionViewModel.cs" />

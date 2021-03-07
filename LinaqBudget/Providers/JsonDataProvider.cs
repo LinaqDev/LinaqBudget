@@ -24,17 +24,17 @@ namespace LinaqBudget.Providers
             throw new NotImplementedException();
         }
 
-        public Account GetSingleAccountById(int id)
+        public Account GetSingleAccountById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public Category GetSingleCategoryById(int id)
+        public Category GetSingleCategoryById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public Transaction GetSingleTransactionById(int id)
+        public Transaction GetSingleTransactionById(string id)
         {
             throw new NotImplementedException();
         }

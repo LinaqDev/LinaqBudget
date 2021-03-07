@@ -8,13 +8,13 @@ namespace LinaqBudget.Interfaces
 {
     public interface IDataProvider
     {
-        Transaction GetSingleTransactionById(int id);
+        Transaction GetSingleTransactionById(string id);
         List<Transaction> GetAllTransactions();
         List<Transaction> GetTransactionsForAccount(Account account);
         List<Transaction> GetTransactionsForCategory(Category category);
-        Account GetSingleAccountById(int id);
+        Account GetSingleAccountById(string id);
         List<Account> GetAllAccounts();
-        Category GetSingleCategoryById(int id);
+        Category GetSingleCategoryById(string id);
         List<Category> GetAllCategories();
     }
 }

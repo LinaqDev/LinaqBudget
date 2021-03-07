@@ -58,6 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\AddAccountWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddCategoryWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,8 +80,16 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Providers\JsonDataProvider.cs" />
+    <Compile Include="ViewModels\AddAccountViewModel.cs" />
+    <Compile Include="ViewModels\AddCategoryViewModel.cs" />
     <Compile Include="ViewModels\BaseModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\AddAccountWin.xaml.cs">
+      <DependentUpon>AddAccountWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddCategoryWin.xaml.cs">
+      <DependentUpon>AddCategoryWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

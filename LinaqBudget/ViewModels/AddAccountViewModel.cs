@@ -12,10 +12,13 @@ namespace LinaqBudget.ViewModels
     public class AddAccountViewModel : BaseModel
     {
         public Account ResultAccount;
+        public bool Canceled = true;
         public AddAccountViewModel()
         {
             ResultAccount = new Account();
             ResultAccount.CreationDate = DateTime.Now;
+            Designation = "New Account";
+
             OkCmd = new RelayCommand(OkExe);
             CancelCmd = new RelayCommand(CancelExe);
         }
@@ -26,6 +29,7 @@ namespace LinaqBudget.ViewModels
             Designation = account.Designation;
             Description = account.Description;
             Balance = account.Balance;
+
             OkCmd = new RelayCommand(OkExe);
             CancelCmd = new RelayCommand(CancelExe);
         }
@@ -71,12 +75,14 @@ namespace LinaqBudget.ViewModels
 
         private void CancelExe(object obj)
         {
+            Canceled = true;
             if (obj is Window win)
                 win.Close();
         }
 
         private void OkExe(object obj)
         {
+            Canceled = false;
             ResultAccount.Designation = Designation;
             ResultAccount.Description = Description;
             ResultAccount.Balance = Balance;

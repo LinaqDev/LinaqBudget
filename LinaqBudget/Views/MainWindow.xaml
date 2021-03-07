@@ -51,8 +51,8 @@
                             <ListViewItem >Account 3</ListViewItem>
                             <ListViewItem >Account 4</ListViewItem>
                         </ListView>
-                        
-                        <Button Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
+
+                        <Button Command="{Binding AddAccountCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
                     </Grid>
                 </Border>
 

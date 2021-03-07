@@ -88,11 +88,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\RelayCommand.cs" />
-    <Compile Include="Interfaces\IDataProvider.cs" />
+    <Compile Include="Interfaces\IDataService.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Transaction.cs" />
-    <Compile Include="Providers\JsonDataProvider.cs" />
+    <Compile Include="Services\JsonDataService.cs" />
     <Compile Include="StorePositionBehavior.cs" />
     <Compile Include="ViewModels\AddAccountViewModel.cs" />
     <Compile Include="ViewModels\AddCategoryViewModel.cs" />

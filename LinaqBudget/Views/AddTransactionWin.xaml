@@ -15,6 +15,15 @@
             <Label>Description</Label>
             <TextBox Text="{Binding Description}"/>
             <Separator/>
+            
+            <Label>Account</Label>
+            <ComboBox />
+            <Separator/>
+
+            <Label>Category</Label>
+            <ComboBox />
+            <Separator/>
+            
             <Label>Amount</Label>
             <TextBox Text="{Binding Amount}" />
             <Separator/>

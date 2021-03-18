@@ -163,8 +163,8 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox MinWidth="100" Margin="3" />
-                            <ComboBox MinWidth="100" Margin="3"/>
+                            <DatePicker Width="150" SelectedDate="{Binding DateFrom}"  materialDesign:HintAssist.Hint="From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <DatePicker Width="150" SelectedDate="{Binding DateTo}" materialDesign:HintAssist.Hint="To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="3,0"/>
                         </StackPanel> 
                         <!--<Separator Grid.Row="1" Height="0.3"/>-->
 

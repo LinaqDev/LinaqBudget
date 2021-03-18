@@ -27,6 +27,10 @@ namespace LinaqBudget.ViewModels
         public MainViewModel()
         {
             dataService = new JsonDataService();
+
+            DateFrom = DateTime.MinValue;
+            DateTo = DateTime.MaxValue;
+
             RefreshAccounts();
             RefreshCategories();
             RefreshTransactions();
@@ -97,6 +101,27 @@ namespace LinaqBudget.ViewModels
             }
         }
 
+        private DateTime _dateFrom;
+        public DateTime DateFrom
+        {
+            get => _dateFrom;
+            set
+            {
+                _dateFrom = value;
+                RaisePropertyChanged(nameof(DateFrom));
+            }
+        }
+
+        private DateTime _dateTo;
+        public DateTime DateTo
+        {
+            get => _dateTo;
+            set
+            {
+                _dateTo = value;
+                RaisePropertyChanged(nameof(DateTo));
+            }
+        }
 
         private void RefreshAccounts()
         {

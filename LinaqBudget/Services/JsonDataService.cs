@@ -24,11 +24,17 @@ namespace LinaqBudget.Services
         /// <summary>
         /// 
         /// </summary>
-        public JsonDataService()
+        public JsonDataService(string dataDirPath = null)
         {
+            if (dataDirPath == null)
+                dataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "LinaqBudget", "Data");
+            else
+                dataDirectory = dataDirPath;
+
             InitDirectories();
             accounts = LoadAccountsData();
             categories = LoadCategoriesData();
+            transactions = LoadTransactionsData();
         }
 
         /// <summary>
@@ -38,7 +44,6 @@ namespace LinaqBudget.Services
         {
             Log.Information("Initializing directories for JsonDataService");
 
-            dataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "LinaqBudget", "Data");
             accountstDataFilePath = Path.Combine(dataDirectory, "accounts.dat");
             categoriesDataFilePath = Path.Combine(dataDirectory, "categories.dat");
             transactionsDataFilePath = Path.Combine(dataDirectory, "transactions.dat");

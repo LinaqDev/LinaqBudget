@@ -196,9 +196,12 @@
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
                             <DataGrid.Columns>
+
+                                <DataGridTextColumn Binding="{Binding CreationDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" Header="Date" IsReadOnly="True" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                                 <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" IsReadOnly="True" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                                 <DataGridTextColumn Binding="{Binding Account.Designation}" Header="Account" IsReadOnly="True"  ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                                 <DataGridTextColumn Binding="{Binding Category.Designation}" Header="Category" IsReadOnly="True"  ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                                <DataGridTextColumn Binding="{Binding Category.Description}" Header="Description" IsReadOnly="True"  ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                             </DataGrid.Columns>
                         </DataGrid> 
 

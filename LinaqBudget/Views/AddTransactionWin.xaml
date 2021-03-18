@@ -26,6 +26,8 @@
 
             <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Designation" Style="{StaticResource MaterialDesignFloatingHintComboBox}"   materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}" materialDesign:HintAssist.Hint="Category" materialDesign:HintAssist.HelperText="Select category"  Margin="3,15"/>
             
+            <ComboBox ItemsSource="{Binding TransactionTypes}" SelectedIndex="{Binding SelectedTransactionType,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"   materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}" materialDesign:HintAssist.Hint="Type" materialDesign:HintAssist.HelperText="Select category"  Margin="3,15"/>
+            
             <TextBox Text="{Binding Amount}"  materialDesign:HintAssist.Hint="Value" materialDesign:HintAssist.HelperText="Insert transaction value" Margin="3,15"/>
 
         </StackPanel>

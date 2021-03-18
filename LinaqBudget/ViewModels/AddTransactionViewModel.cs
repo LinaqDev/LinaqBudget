@@ -105,6 +105,19 @@ namespace LinaqBudget.ViewModels
             }
         }
 
+        public List<string> TransactionTypes => new List<string>() { "Expense", "Income" };
+
+        private int _selectedTransactionType = 0;
+        public int SelectedTransactionType
+        {
+            get => _selectedTransactionType;
+            set
+            {
+                _selectedTransactionType = value;
+                RaisePropertyChanged(nameof(SelectedTransactionType));
+            }
+        }
+
         private Category _selectedCategory;
         public Category SelectedCategory
         {
@@ -132,9 +145,12 @@ namespace LinaqBudget.ViewModels
             ResultTransaction.Account = SelectedAccount;
             ResultTransaction.CategoryId = SelectedCategory.Id;
             ResultTransaction.Category = SelectedCategory;
+            ResultTransaction.Type = SelectedTransactionType;
 
             if (obj is Window win)
                 win.Close();
         }
+
+
     }
 }

@@ -198,7 +198,7 @@
 
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow">
-                                    <Setter Property="Background" Value="Yellow"/>
+                                    <Setter Property="Background" Value="Transparent"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Type}" Value="0">
                                             <Setter Property="Background" Value="#7FFF0000"/>

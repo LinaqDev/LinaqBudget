@@ -50,15 +50,35 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions> 
 
-                    <ListBox ItemsSource="{Binding Accounts}" Grid.Row="1"   BorderThickness="0,0.5">
-                        <ListBox.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Delete" Command="{Binding DeleteAccountCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
-                                </MenuItem>
-                            </ContextMenu>
-                        </ListBox.ContextMenu>
+                    <ListBox ItemsSource="{Binding Accounts}" Grid.Row="1"   BorderThickness="0,0.5" SelectedItem="{Binding SelectedAccount,UpdateSourceTrigger=PropertyChanged}">
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="View" Command="{Binding }" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="BookInformationVariant" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Edit" Command="{Binding }" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="Pencil" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Delete" Command="{Binding DeleteAccountCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="Delete"  />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator />
 
-                        <ListBox.ItemTemplate>
+                                    <MenuItem Header="Add New" Command="{Binding AddAccountCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="AccountPlus"  />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+
+                            <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
                                     <TextBlock Text="{Binding Designation}"/>
@@ -89,8 +109,28 @@
                         <ListBox ItemsSource="{Binding Categories}" Grid.Row="1" BorderThickness="0,0.5">
                             <ListBox.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Delete" Command="{Binding DeleteCategoryCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                    <MenuItem Header="View" Command="{Binding }" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="BookInformationVariant" />
+                                        </MenuItem.Icon>
                                     </MenuItem>
+                                    <MenuItem Header="Edit" Command="{Binding }" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="Pencil" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Delete" Command="{Binding DeleteCategoryCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="Delete"  />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator />
+
+                                    <MenuItem Header="Add New" Command="{Binding }" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="AccountPlus"  />
+                                        </MenuItem.Icon>
+                                    </MenuItem> 
                                 </ContextMenu>
                             </ListBox.ContextMenu>
 
@@ -131,8 +171,28 @@
                         <ListBox ItemsSource="{Binding Transactions}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
                             <ListBox.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Delete" Command="{Binding DeleteTransactionCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                    <MenuItem Header="View" Command="{Binding }" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="BookInformationVariant" />
+                                        </MenuItem.Icon>
                                     </MenuItem>
+                                    <MenuItem Header="Edit" Command="{Binding }" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="Pencil" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Delete" Command="{Binding DeleteTransactionCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="Delete"  />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator />
+
+                                    <MenuItem Header="Add New" Command="{Binding }" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="AccountPlus"  />
+                                        </MenuItem.Icon>
+                                    </MenuItem> 
                                 </ContextMenu>
                             </ListBox.ContextMenu>
 

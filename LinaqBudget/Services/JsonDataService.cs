@@ -310,7 +310,7 @@ namespace LinaqBudget.Services
         private void SaveCategories()
         {
             Log.Information("Saving categories data...");
-            var content = JsonConvert.SerializeObject(accounts, Formatting.Indented);
+            var content = JsonConvert.SerializeObject(categories, Formatting.Indented);
             File.WriteAllText(categoriesDataFilePath, content);
         }
         /// <summary>

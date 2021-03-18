@@ -5,7 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LinaqBudget"
         mc:Ignorable="d"
-        Title="{Binding AppCaption}" MinHeight="450" MinWidth="800" local:StorePositionBehavior.StorageKey="MainWindowPosition">
+        Title="{Binding AppCaption}" MinHeight="450" MinWidth="800" local:StorePositionBehavior.StorageKey="MainWindowPosition"   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,81 +37,79 @@
             </MenuItem>
         </Menu>
 
-        <Border BorderBrush="black" BorderThickness="0,0,0.5,0" Grid.Row="1" Margin="{Binding LeftPanelMargin}">
-            <Expander ExpandDirection="Right" IsExpanded="True">
-                <Grid Width="200" Margin="-20,5,0,0">
-                    <Grid.RowDefinitions >
+        <TabControl Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+            <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem.Header>
+                    <materialDesign:PackIcon Kind="AccountGroup" Width="24"  Height="24" />
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Border BorderBrush="Black" BorderThickness="0,0,0,0.5">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="ACCOUNTS" HorizontalAlignment="Center" />
+                    <TextBlock Text="ACCOUNTS" HorizontalAlignment="Center" />
 
-                            <ListBox ItemsSource="{Binding Accounts}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
-                                <ListBox.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Delete" Command="{Binding DeleteAccountCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
-                                        </MenuItem>
-                                    </ContextMenu>
-                                </ListBox.ContextMenu>
+                    <ListBox ItemsSource="{Binding Accounts}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Delete" Command="{Binding DeleteAccountCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
 
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Designation}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Designation}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                            <Button Command="{Binding AddAccountCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
-                        </Grid>
-                    </Border>
-
-                    <Grid Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="CATEGORIES" HorizontalAlignment="Center"/>
-
-                        <ListBox ItemsSource="{Binding Categories}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
-                            <ListBox.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Delete" Command="{Binding DeleteCategoryCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
-                                    </MenuItem>
-                                </ContextMenu>
-                            </ListBox.ContextMenu>
-
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Designation}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-
-                        <Button Command="{Binding AddCategoryCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
-                    </Grid>
-
+                    <Button Command="{Binding AddAccountCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
                 </Grid>
-            </Expander>
-        </Border>
+            </TabItem>
 
-        <TabControl Grid.Row="1" Grid.Column="1">
-            <TabItem Header="Transactions">
+            <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem.Header>
+                    <materialDesign:PackIcon Kind="Shape" Width="24"  Height="24" />
+                </TabItem.Header>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="CATEGORIES" HorizontalAlignment="Center"/>
+
+                    <ListBox ItemsSource="{Binding Categories}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Delete" Command="{Binding DeleteCategoryCmd}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}">
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Designation}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button Command="{Binding AddCategoryCmd}" Grid.Row="2" Content="Add" HorizontalAlignment="Left" Margin="3" MinWidth="50"/>
+                </Grid>
+            </TabItem>
+
+
+
+            <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem.Header>
+                    <materialDesign:PackIcon Kind="BankTransfer" Width="24"  Height="24" />
+                </TabItem.Header>
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -117,7 +122,7 @@
                         <ComboBox MinWidth="100" Margin="3" />
                         <ComboBox MinWidth="100" Margin="3"/>
                     </StackPanel>
-                    
+                    <TextBlock Text="TRANSACTIONS" HorizontalAlignment="Center"/>
                     <!--<Separator Grid.Row="1" Height="0.3"/>-->
 
                     <ListBox ItemsSource="{Binding Transactions}" Grid.Row="1" Margin="3"  BorderThickness="0,0.5">
@@ -144,12 +149,9 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Recurring Transactions">
-                
-            </TabItem>
-        </TabControl>
-
-
+ 
+        </TabControl> 
+ 
         <StatusBar Grid.Row="2" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0.5,0,0">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>

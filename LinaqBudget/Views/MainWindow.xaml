@@ -160,7 +160,18 @@
                     </Grid>
                 </GroupBox>
             </TabItem>
-            
+
+            <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" >
+                <TabItem.Header>
+                    <materialDesign:PackIcon Kind="Transfer" Width="24"  Height="24" />
+                </TabItem.Header>
+                <Grid >
+                    <GroupBox Header="Recurring Transfers" Style="{DynamicResource MaterialDesignGroupBox}" BorderThickness="0" Margin="0">
+
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
             <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" Visibility="Collapsed">
                 <TabItem.Header>  
                     <materialDesign:PackIcon Kind="CursorDefault" Width="24"  Height="24" />

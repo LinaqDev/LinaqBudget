@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LinaqBudget.Views"
         mc:Ignorable="d"
-        Title="AddAccountWin" Height="250" Width="400"   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Account" Height="300" Width="400"   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Icon="/LinaqBudget;component/LinaqIcon48x48.ico"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"
@@ -19,17 +19,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Label> Designation</Label>
-            <TextBox Text="{Binding Designation}"/>
-            <Separator/>
 
-            <Label>Description</Label>
-            <TextBox Text="{Binding Description}"/>
-            <Separator/>
-
-            <Label>Initial Balance</Label>
-            <TextBox Text="{Binding Balance}" />
-            <Separator/> 
+            <TextBox Text="{Binding Designation}"  materialDesign:HintAssist.Hint="Designation" materialDesign:HintAssist.HelperText="Insert account designation" Margin="3,15"/>
+            <TextBox Text="{Binding Description}"  materialDesign:HintAssist.Hint="Description" materialDesign:HintAssist.HelperText="Insert account description"  Margin="3,15"/>
+            <TextBox Text="{Binding Balance}" materialDesign:HintAssist.Hint="Comment" materialDesign:HintAssist.HelperText="Insert starting account balance"  Margin="3,15"/>
+              
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">

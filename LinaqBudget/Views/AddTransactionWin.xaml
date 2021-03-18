@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LinaqBudget.Views"
         mc:Ignorable="d"
-        Title="AddTransactionWin" Height="250" Width="400"   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Transaction" Height="400" Width="400"   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterOwner"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"
@@ -19,21 +20,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Label>Description</Label>
-            <TextBox Text="{Binding Description}"/>
-            <Separator/>
-            
-            <Label>Account</Label>
-            <ComboBox />
-            <Separator/>
+            <TextBox Text="{Binding Description}"  materialDesign:HintAssist.Hint="Description" materialDesign:HintAssist.HelperText="Insert account description" Margin="3,15"/>
 
-            <Label>Category</Label>
-            <ComboBox />
-            <Separator/>
-            
-            <Label>Amount</Label>
-            <TextBox Text="{Binding Amount}" />
-            <Separator/>
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}"   materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}" materialDesign:HintAssist.Hint="Account" materialDesign:HintAssist.HelperText="Select account"  Margin="3,15"/>
+
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}"   materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}" materialDesign:HintAssist.Hint="Category" materialDesign:HintAssist.HelperText="Select category"  Margin="3,15"/>
+            <TextBox Text="{Binding Amount}"  materialDesign:HintAssist.Hint="Value" materialDesign:HintAssist.HelperText="Insert transaction value" Margin="3,15"/>
+
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">

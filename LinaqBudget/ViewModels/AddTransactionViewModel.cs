@@ -16,6 +16,7 @@ namespace LinaqBudget.ViewModels
         private readonly IDataService dataService;
         public Transaction ResultTransaction;
         public bool Canceled = true;
+
         public AddTransactionViewModel(string AccountId, string CategoryId, IDataService dataService)
         {
             this.dataService = dataService;
@@ -27,15 +28,18 @@ namespace LinaqBudget.ViewModels
 
             Accounts = new ObservableCollection<Account>(dataService.GetAllAccounts());
             if (Accounts.Count == 0)
-                throw new ArgumentOutOfRangeException("Account can not be empty");
+                throw new ArgumentOutOfRangeException("Account can not be empty"); 
+            SelectedAccount = Accounts.FirstOrDefault(x => x.Id == AccountId); 
+            if (SelectedAccount == null)
+                SelectedAccount = Accounts.First();
 
-            SelectedAccount = Accounts.FirstOrDefault(x => x.Id == AccountId);
 
-            Categories = new ObservableCollection<Category>(dataService.GetAllCategories());
-            if (Accounts.Count == 0)
+            Categories = new ObservableCollection<Category>(dataService.GetAllCategories()); 
+            if (Categories.Count == 0)
                 throw new ArgumentOutOfRangeException("Categories can not be empty");
-
-            SelectedCategory = Categories.FirstOrDefault(x => x.Id == CategoryId);
+            SelectedCategory = Categories.FirstOrDefault(x => x.Id == CategoryId); 
+            if (SelectedCategory == null)
+                SelectedCategory = Categories.First();
         }
          
 

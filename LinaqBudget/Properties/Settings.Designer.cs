@@ -34,5 +34,29 @@ namespace LinaqBudget.Properties {
                 this["MainWindowPosition"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastTransactionAccountId {
+            get {
+                return ((string)(this["LastTransactionAccountId"]));
+            }
+            set {
+                this["LastTransactionAccountId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastTransactionCategoryId {
+            get {
+                return ((string)(this["LastTransactionCategoryId"]));
+            }
+            set {
+                this["LastTransactionCategoryId"] = value;
+            }
+        }
     }
 }

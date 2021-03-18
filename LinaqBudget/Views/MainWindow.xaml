@@ -39,8 +39,8 @@
 
         <TabControl Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Padding="0">
             <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                <TabItem.Header>
-                    <materialDesign:PackIcon Kind="AccountGroup" Width="24"  Height="24" />
+                <TabItem.Header> 
+                    <materialDesign:PackIcon Kind="AccountGroup" Width="24"  Height="24" /> 
                 </TabItem.Header>
                 <GroupBox Header="Accounts" Style="{DynamicResource MaterialDesignGroupBox}" BorderThickness="0" Margin="0">
                 <Grid>

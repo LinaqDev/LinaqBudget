@@ -32,7 +32,7 @@ namespace LinaqBudget.ViewModels
             RefreshTransactions();
 
             AddAccountCmd = new RelayCommand(AddAccountExe);
-            DeleteAccountCmd = new RelayCommand(DeleteAccountExe);
+            DeleteAccountCmd = new RelayCommand(DeleteAccountExe, (x) => SelectedAccount != null);
 
             AddCategoryCmd = new RelayCommand(AddCategoryExe);
             DeleteCategoryCmd = new RelayCommand(DeleteCategoryExe);
@@ -59,6 +59,17 @@ namespace LinaqBudget.ViewModels
             {
                 _accounts = value;
                 RaisePropertyChanged(nameof(Accounts));
+            }
+        }
+
+        private Account _selectedAccount;
+        public Account SelectedAccount
+        {
+            get => _selectedAccount;
+            set
+            {
+                 _selectedAccount = value;
+                RaisePropertyChanged(nameof(SelectedAccount));
             }
         }
 

@@ -139,6 +139,7 @@ namespace LinaqBudget.ViewModels
         private void RefreshTransactions()
         {
             Transactions = new ObservableCollection<Transaction>(dataService.GetAllTransactions());
+            RefreshAccounts();
         }
 
         private void AddAccountExe(object obj)

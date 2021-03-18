@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,15 @@ namespace LinaqBudget
             Id = Guid.NewGuid().ToString();
             Account = new Account();
             Category = new Category();
+            CreationDate = DateTime.Now;
         }
 
         public string Id { get; set; }
         public string AccountId { get; set; }
+        [JsonIgnore]
         public Account Account { get; set; }
         public string CategoryId { get; set; }
+        [JsonIgnore]
         public Category Category { get; set; }
         public string Description { get; set; }
         public DateTime CreationDate { get; set; }

@@ -11,6 +11,7 @@ namespace LinaqBudget
         public Account()
         {
             Id = Guid.NewGuid().ToString();
+            CreationDate = DateTime.Now;
         }
 
         public string Id { get; set; }

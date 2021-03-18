@@ -156,8 +156,7 @@
                 <GroupBox Header="Transactions" Style="{DynamicResource MaterialDesignGroupBox}" BorderThickness="0" Margin="0">
                     <Grid >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/> 
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -165,8 +164,10 @@
                         <StackPanel Orientation="Horizontal">
                             <DatePicker Width="150" SelectedDate="{Binding DateFrom}"  materialDesign:HintAssist.Hint="From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             <DatePicker Width="150" SelectedDate="{Binding DateTo}" materialDesign:HintAssist.Hint="To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="3,0"/>
-                        </StackPanel> 
-                        <!--<Separator Grid.Row="1" Height="0.3"/>-->
+
+                            <ComboBox Width="150" ItemsSource="{Binding FilterAccounts}" SelectedItem="{Binding SelectedFilterAccount,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Designation" Style="{StaticResource MaterialDesignFloatingHintComboBox}"   materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}" materialDesign:HintAssist.Hint="Account"  Margin="3,0"/>
+                            <ComboBox Width="150" ItemsSource="{Binding FilterCategories}" SelectedItem="{Binding SelectedFilterCategory,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Designation" Style="{StaticResource MaterialDesignFloatingHintComboBox}"   materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}" materialDesign:HintAssist.Hint="Category"  Margin="3,0"/>
+                        </StackPanel>  
 
                         <DataGrid ItemsSource="{Binding Transactions}" Grid.Row="1" VerticalAlignment="Stretch" CanUserAddRows="False"  AutoGenerateColumns="False" HeadersVisibility="All" BorderThickness="0">
                             <DataGrid.ContextMenu>
@@ -195,15 +196,31 @@
                                     </MenuItem>
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
+
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Type}" Value="0">
+                                            <Setter Property="Background" Value="#7FFF0000"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Type}" Value="1">
+                                            <Setter Property="Background" Value="#7F008000"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            
+                            
                             <DataGrid.Columns>
+
+                                <DataGridTextColumn Binding="{Binding CreationDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" Header="Date" IsReadOnly="True" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                                 <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" IsReadOnly="True" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                                 <DataGridTextColumn Binding="{Binding Account.Designation}" Header="Account" IsReadOnly="True"  ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                                 <DataGridTextColumn Binding="{Binding Category.Designation}" Header="Category" IsReadOnly="True"  ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
+                                <DataGridTextColumn Binding="{Binding Description}" Header="Description" IsReadOnly="True"  ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                             </DataGrid.Columns>
-                        </DataGrid> 
-
-
-                        <!--<Separator Grid.Row="3" Height="0.3"/>-->
+                        </DataGrid>  
 
                         <StackPanel Grid.Row="4" Orientation="Horizontal" >
                             <Button Command="{Binding AddTransactionCmd}" Style="{StaticResource MaterialDesignFloatingActionButton}"  ToolTip="MaterialDesignFloatingActionButton" HorizontalAlignment="Left"   Margin="0,0,10,0">

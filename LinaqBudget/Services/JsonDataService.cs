@@ -17,9 +17,18 @@ namespace LinaqBudget.Services
         private string categoriesDataFilePath;
         private string transactionsDataFilePath;
 
-        private List<Account> accounts { get; set; }
-        private List<Category> categories { get; set; }
-        private List<Transaction> transactions { get; set; }
+        private List<Account> _accounts;
+        private List<Account> Accounts
+        {
+            get => _accounts;
+            set
+            {
+                _accounts = value;
+            }
+        }
+
+        private List<Category> Categories { get; set; }
+        private List<Transaction> Transactions { get; set; }
 
         /// <summary>
         /// 
@@ -32,9 +41,9 @@ namespace LinaqBudget.Services
                 dataDirectory = dataDirPath;
 
             InitDirectories();
-            accounts = LoadAccountsData();
-            categories = LoadCategoriesData();
-            transactions = LoadTransactionsData();
+            Accounts = LoadAccountsData();
+            Categories = LoadCategoriesData();
+            Transactions = LoadTransactionsData();
         }
 
         /// <summary>
@@ -64,7 +73,7 @@ namespace LinaqBudget.Services
         public void AddAccount(Account account)
         {
             Log.Information("Adding new account {0}", account.Designation);
-            accounts.Add(account);
+            Accounts.Add(account);
             SaveAccounts();
         }
 
@@ -75,7 +84,7 @@ namespace LinaqBudget.Services
         public void AddCategory(Category category)
         {
             Log.Information("Adding new category {0}", category.Designation);
-            categories.Add(category);
+            Categories.Add(category);
             SaveCategories();
         }
 
@@ -86,7 +95,7 @@ namespace LinaqBudget.Services
         public void AddTransaction(Transaction transaction)
         {
             Log.Information("Adding new transactions {0}", transaction.Description);
-            transactions.Add(transaction);
+            Transactions.Add(transaction);
             SaveTransactions();
         }
 
@@ -96,10 +105,10 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Account> GetAllAccounts()
         {
-            if (accounts == null)
-                accounts = LoadAccountsData();
+            if (Accounts == null)
+                Accounts = LoadAccountsData();
 
-            return accounts;
+            return Accounts;
         }
 
         /// <summary>
@@ -108,10 +117,10 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Category> GetAllCategories()
         {
-            if (categories == null)
-                categories = LoadCategoriesData();
+            if (Categories == null)
+                Categories = LoadCategoriesData();
 
-            return categories;
+            return Categories;
         }
 
         /// <summary>
@@ -120,10 +129,10 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Transaction> GetAllTransactions()
         {
-            if (transactions == null)
-                transactions = LoadTransactionsData();
+            if (Transactions == null)
+                Transactions = LoadTransactionsData();
 
-            return transactions;
+            return Transactions;
         }
 
         /// <summary>
@@ -133,7 +142,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public Account GetSingleAccountById(string id)
         {
-            return accounts.FirstOrDefault(x => x.Id == id);
+            return Accounts.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -143,7 +152,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public Category GetSingleCategoryById(string id)
         {
-            return categories.FirstOrDefault(x => x.Id == id);
+            return Categories.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -153,7 +162,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public Transaction GetSingleTransactionById(string id)
         {
-            return transactions.FirstOrDefault(x => x.Id == id);
+            return Transactions.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -163,7 +172,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Transaction> GetTransactionsForAccount(Account account)
         {
-            return transactions.Where(x => x.AccountId == account.Id).ToList();
+            return Transactions.Where(x => x.AccountId == account.Id).ToList();
         }
 
         /// <summary>
@@ -173,7 +182,7 @@ namespace LinaqBudget.Services
         /// <returns></returns>
         public List<Transaction> GetTransactionsForCategory(Category category)
         {
-            return transactions.Where(x => x.CategoryId == category.Id).ToList();
+            return Transactions.Where(x => x.CategoryId == category.Id).ToList();
         }
 
         /// <summary>
@@ -230,8 +239,8 @@ namespace LinaqBudget.Services
 
                 foreach (var item in result)
                 {
-                    item.Account = accounts.FirstOrDefault(x=>x.Id == item.AccountId);
-                    item.Category = categories.FirstOrDefault(x=>x.Id == item.CategoryId);
+                    item.Account = Accounts.FirstOrDefault(x=>x.Id == item.AccountId);
+                    item.Category = Categories.FirstOrDefault(x=>x.Id == item.CategoryId);
                 }
 
                 return result;
@@ -247,8 +256,8 @@ namespace LinaqBudget.Services
         /// <param name="transaction"></param>
         public void DeleteTransaction(Transaction transaction)
         {
-            var toRemove = transactions.FirstOrDefault(x => x.Id == transaction.Id);
-            transactions.Remove(toRemove);
+            var toRemove = Transactions.FirstOrDefault(x => x.Id == transaction.Id);
+            Transactions.Remove(toRemove);
             SaveTransactions();
         }
 
@@ -258,8 +267,8 @@ namespace LinaqBudget.Services
         /// <param name="id"></param>
         public void DeleteTransactionById(string id)
         {
-            var toRemove = transactions.FirstOrDefault(x => x.Id == id);
-            transactions.Remove(toRemove);
+            var toRemove = Transactions.FirstOrDefault(x => x.Id == id);
+            Transactions.Remove(toRemove);
             SaveTransactions();
         }
 
@@ -269,8 +278,8 @@ namespace LinaqBudget.Services
         /// <param name="account"></param>
         public void DeleteAccount(Account account)
         {
-            var toRemove = accounts.FirstOrDefault(x => x.Id == account.Id);
-            accounts.Remove(toRemove);
+            var toRemove = Accounts.FirstOrDefault(x => x.Id == account.Id);
+            Accounts.Remove(toRemove);
             SaveAccounts();
         }
 
@@ -280,8 +289,8 @@ namespace LinaqBudget.Services
         /// <param name="id"></param>
         public void DeleteAccountById(string id)
         {
-            var toRemove = accounts.FirstOrDefault(x => x.Id == id);
-            accounts.Remove(toRemove);
+            var toRemove = Accounts.FirstOrDefault(x => x.Id == id);
+            Accounts.Remove(toRemove);
             SaveAccounts();
         }
 
@@ -291,8 +300,8 @@ namespace LinaqBudget.Services
         /// <param name="category"></param>
         public void DeleteCategory(Category category)
         {
-            var toRemove = categories.FirstOrDefault(x => x.Id == category.Id);
-            categories.Remove(toRemove);
+            var toRemove = Categories.FirstOrDefault(x => x.Id == category.Id);
+            Categories.Remove(toRemove);
             SaveCategories();
         }
 
@@ -302,8 +311,8 @@ namespace LinaqBudget.Services
         /// <param name="id"></param>
         public void DeleteCategoryById(string id)
         {
-            var toRemove = categories.FirstOrDefault(x => x.Id == id);
-            categories.Remove(toRemove);
+            var toRemove = Categories.FirstOrDefault(x => x.Id == id);
+            Categories.Remove(toRemove);
             SaveCategories();
         }
 
@@ -313,7 +322,7 @@ namespace LinaqBudget.Services
         private void SaveAccounts()
         {
             Log.Information("Saving accounts data...");
-            var content = JsonConvert.SerializeObject(accounts, Formatting.Indented);
+            var content = JsonConvert.SerializeObject(Accounts, Formatting.Indented);
             File.WriteAllText(accountstDataFilePath, content);
         }
 
@@ -323,7 +332,7 @@ namespace LinaqBudget.Services
         private void SaveCategories()
         {
             Log.Information("Saving categories data...");
-            var content = JsonConvert.SerializeObject(categories, Formatting.Indented);
+            var content = JsonConvert.SerializeObject(Categories, Formatting.Indented);
             File.WriteAllText(categoriesDataFilePath, content);
         }
         /// <summary>
@@ -332,7 +341,7 @@ namespace LinaqBudget.Services
         private void SaveTransactions()
         {
             Log.Information("Saving transactions data...");
-            var content = JsonConvert.SerializeObject(transactions, Formatting.Indented);
+            var content = JsonConvert.SerializeObject(Transactions, Formatting.Indented);
             File.WriteAllText(transactionsDataFilePath, content);
         }
     }

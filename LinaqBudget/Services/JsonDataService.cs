@@ -108,6 +108,8 @@ namespace LinaqBudget.Services
             if (Accounts == null)
                 Accounts = LoadAccountsData();
 
+            CountAccountsBalance();
+
             return Accounts;
         }
 
@@ -120,6 +122,9 @@ namespace LinaqBudget.Services
             if (Categories == null)
                 Categories = LoadCategoriesData();
 
+            CountAccountsBalance();
+
+
             return Categories;
         }
 
@@ -131,6 +136,8 @@ namespace LinaqBudget.Services
         {
             if (Transactions == null)
                 Transactions = LoadTransactionsData();
+
+            CountAccountsBalance();
 
             return Transactions;
         }
@@ -343,6 +350,20 @@ namespace LinaqBudget.Services
             Log.Information("Saving transactions data...");
             var content = JsonConvert.SerializeObject(Transactions, Formatting.Indented);
             File.WriteAllText(transactionsDataFilePath, content);
+        }
+
+        private void CountAccountsBalance()
+        {
+            Transactions = LoadTransactionsData();
+            foreach (var acc in Accounts)
+            {
+                var t = Transactions.Where(x => x.AccountId == acc.Id);
+
+                var expenses = t.Where(x => x.Type == 0).Select(x => x.Amount).Sum();
+                var incomes = t.Where(x => x.Type == 1).Select(x => x.Amount).Sum();
+
+                acc.Balance = incomes = expenses;
+            }
         }
     }
 }

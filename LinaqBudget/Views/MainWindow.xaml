@@ -82,6 +82,7 @@
                             <DataTemplate>
                                 <StackPanel>
                                     <TextBlock Text="{Binding Designation}"/>
+                                    <TextBlock Text="{Binding Balance}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

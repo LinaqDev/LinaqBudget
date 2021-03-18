@@ -118,6 +118,8 @@ namespace LinaqBudget.ViewModels
             var dc = new AddAccountViewModel();
             var win = new AddAccountWin() { DataContext = dc };
 
+            win.Owner = App.Current.MainWindow;
+
             win.ShowDialog();
 
             if (dc.Canceled)
@@ -135,6 +137,8 @@ namespace LinaqBudget.ViewModels
             var dc = new AddCategoryViewModel();
             var win = new AddCategoryWin() { DataContext = dc };
 
+            win.Owner = App.Current.MainWindow;
+
             win.ShowDialog();
 
             if (dc.Canceled)
@@ -151,6 +155,8 @@ namespace LinaqBudget.ViewModels
         {
             var dc = new AddTransactionViewModel(lastTransactionAccount, lastTransactionCategory);
             var win = new AddTransactionWin() { DataContext = dc };
+
+            win.Owner = App.Current.MainWindow;
 
             win.ShowDialog();
 

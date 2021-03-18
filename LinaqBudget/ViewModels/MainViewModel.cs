@@ -37,7 +37,7 @@ namespace LinaqBudget.ViewModels
             AddCategoryCmd = new RelayCommand(AddCategoryExe);
             DeleteCategoryCmd = new RelayCommand(DeleteCategoryExe);
 
-            AddTransactionCmd = new RelayCommand(AddTransactionExe);
+            AddTransactionCmd = new RelayCommand(AddTransactionExe, (x) => Accounts.Count > 0 && Categories.Count > 0);
             DeleteTransactionCmd = new RelayCommand(DeleteTransactionExe);
         }
 
@@ -153,7 +153,7 @@ namespace LinaqBudget.ViewModels
 
         private void AddTransactionExe(object obj)
         {
-            var dc = new AddTransactionViewModel(lastTransactionAccount, lastTransactionCategory);
+            var dc = new AddTransactionViewModel(lastTransactionAccount, lastTransactionCategory, dataService);
             var win = new AddTransactionWin() { DataContext = dc };
 
             win.Owner = App.Current.MainWindow;

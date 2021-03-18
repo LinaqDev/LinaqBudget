@@ -226,7 +226,15 @@ namespace LinaqBudget.Services
             {
                 Log.Information("transactions loaded from file.");
                 var content = File.ReadAllText(transactionsDataFilePath);
-                return JsonConvert.DeserializeObject<List<Transaction>>(content);
+                var result = JsonConvert.DeserializeObject<List<Transaction>>(content);
+
+                foreach (var item in result)
+                {
+                    item.Account = accounts.FirstOrDefault(x=>x.Id == item.AccountId);
+                    item.Category = categories.FirstOrDefault(x=>x.Id == item.CategoryId);
+                }
+
+                return result;
             }
 
             Log.Information("transactions data file does not exist.");

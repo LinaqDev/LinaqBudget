@@ -133,7 +133,12 @@ namespace LinaqBudget.Services
 
             foreach (var item in Accounts)
             {
-                result.AddRange(item.Transactions); 
+                foreach (var t in item.Transactions)
+                {
+                    t.Account = Accounts.FirstOrDefault(x=>x.Id == t.AccountId);
+                    t.Category = Categories.FirstOrDefault(x=>x.Id == t.CategoryId);
+                    result.Add(t);
+                }
             } 
 
             return result;

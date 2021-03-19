@@ -10,8 +10,7 @@ namespace LinaqBudget.Interfaces
     {
         void AddTransaction(Transaction transaction);
         void DeleteTransaction(Transaction transaction); 
-        void DeleteTransactionById(string id); 
-        Transaction GetSingleTransactionById(string id);
+        void DeleteTransactionById(string id);  
         List<Transaction> GetAllTransactions();
         List<Transaction> GetTransactionsForAccount(Account account);
         List<Transaction> GetTransactionsForCategory(Category category);

@@ -84,8 +84,7 @@ namespace LinaqBudget.ViewModels
         {
             Canceled = false;
             ResultAccount.Designation = Designation;
-            ResultAccount.Description = Description;
-            ResultAccount.Balance = Balance;
+            ResultAccount.Description = Description; 
 
             if (obj is Window win)
                 win.Close();
